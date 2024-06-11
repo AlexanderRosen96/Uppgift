@@ -1,0 +1,13 @@
+server:
+  port: 8585
+spring:
+  application:
+    name: Mars-Gateway
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: API-MICROSERVICES
+            uri: lb://API-MICROSERVICES
+            predicates:
+              - Path=/api/**
