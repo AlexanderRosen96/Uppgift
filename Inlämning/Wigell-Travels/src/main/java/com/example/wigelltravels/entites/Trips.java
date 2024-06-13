@@ -1,5 +1,6 @@
 package com.example.wigelltravels.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -14,10 +15,12 @@ public class Trips {
 
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
+    @JsonIgnoreProperties({"trips", "bookings"})
     private Destination destination;
 
 
     @OneToMany (mappedBy = "trip",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"Trips", "trip", "destination"})
     private List<Bookings> bookings;
 
     public Trips() {

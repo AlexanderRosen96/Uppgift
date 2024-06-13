@@ -1,5 +1,6 @@
 package com.example.wigelltravels.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class Customers {
     private String address;
 
     @OneToMany (mappedBy = "customer",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("Customers")
     private List<Bookings> bookingsList;
 
     public Customers() {

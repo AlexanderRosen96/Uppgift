@@ -1,5 +1,7 @@
 package com.example.wigelltravels.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -13,18 +15,25 @@ public class Bookings {
     private LocalDate timeOfDeparture;
 
     private double totalPriceInSEK;
+
     private double totalPriceInEuro;
 
     @ManyToOne
     @JoinColumn(name = "id_Number")
+    @JsonIgnoreProperties("bookingsList")
+    @JsonProperty("customer")
     private Customers customer;
 
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
+    @JsonIgnoreProperties({"bookings", "destination"})
+    @JsonProperty("trip")
     private Trips trip;
 
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
+    @JsonIgnoreProperties({"bookings", "trips"})
+    @JsonProperty("destination")
     private Destination destination;
 
     public Bookings() {

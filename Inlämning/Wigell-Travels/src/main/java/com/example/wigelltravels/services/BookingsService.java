@@ -1,5 +1,6 @@
 package com.example.wigelltravels.services;
 
+import org.apache.log4j.Logger;
 import com.example.wigelltravels.entites.Bookings;
 import com.example.wigelltravels.entites.Customers;
 import com.example.wigelltravels.exceptions.EmptyListEception;
@@ -13,8 +14,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+
 @Service
 public class BookingsService implements BookingsServiceInterface{
+    private static final Logger logger = Logger.getLogger(BookingsService.class);
 
     @Autowired
     private BookingsRepository bookingsRepository;
@@ -25,6 +28,7 @@ public class BookingsService implements BookingsServiceInterface{
     @Override
     public Bookings addBooking(Bookings bookings) {
         bookingsRepository.save(bookings);
+        logger.info("Customer created booking " + bookings.getId());
         return bookings;
     }
 
