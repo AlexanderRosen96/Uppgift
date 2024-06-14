@@ -39,6 +39,7 @@ public class DestinationService implements DestinationServiceInterface{
     @Override
     public void deleteDestinationById(int id) {
         Destination destination = destinationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("destination", "id", id));
+        destinationRepository.delete(destination);
         logger.info("Admin deleted destination " + destination.getId());
     }
 

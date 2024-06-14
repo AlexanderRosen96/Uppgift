@@ -12,19 +12,28 @@ public class Destination {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(length = 25, nullable = false)
     private String city;
 
+    @Column(length = 40, nullable = false)
     private String country;
 
-    @OneToMany (mappedBy = "destination",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany (mappedBy = "destination",cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("Destination")
     private List<Trips> trips;
 
-    @OneToMany(mappedBy = "destination",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "destination",cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("Destination")
     private List<Bookings> bookings;
 
     public Destination() {
+    }
+
+    public Destination(String city, String country, List<Trips> trips, List<Bookings> bookings) {
+        this.city = city;
+        this.country = country;
+        this.trips = trips;
+        this.bookings = bookings;
     }
 
     public int getId() {

@@ -12,31 +12,66 @@ public class Bookings {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(length = 12, nullable = false)
     private LocalDate timeOfDeparture;
 
+    @Column(length = 2000000, nullable = false)
     private double totalPriceInSEK;
 
     private double totalPriceInEuro;
 
     @ManyToOne
-    @JoinColumn(name = "id_Number")
+    @JoinColumn(name = "id_Number", nullable = false)
     @JsonIgnoreProperties("bookingsList")
     @JsonProperty("customer")
     private Customers customer;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
+    @JoinColumn(referencedColumnName = "id", nullable = false)
     @JsonIgnoreProperties({"bookings", "destination"})
     @JsonProperty("trip")
     private Trips trip;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
+    @JoinColumn(referencedColumnName = "id", nullable = false)
     @JsonIgnoreProperties({"bookings", "trips"})
     @JsonProperty("destination")
     private Destination destination;
 
     public Bookings() {
+    }
+
+    public Bookings(LocalDate timeOfDeparture, double totalPriceInSEK, double totalPriceInEuro, Customers customer, Trips trip, Destination destination) {
+        this.timeOfDeparture = timeOfDeparture;
+        this.totalPriceInSEK = totalPriceInSEK;
+        this.totalPriceInEuro = totalPriceInEuro;
+        this.customer = customer;
+        this.trip = trip;
+        this.destination = destination;
+    }
+
+    public Customers getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customers customer) {
+        this.customer = customer;
+    }
+
+    public Trips getTrip() {
+        return trip;
+    }
+
+    public void setTrip(Trips trip) {
+        this.trip = trip;
+    }
+
+    public Destination getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Destination destination) {
+        this.destination = destination;
     }
 
     public int getId() {

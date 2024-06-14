@@ -7,7 +7,7 @@ spring:
     gateway:
       mvc:
         routes:
-          - id: API-MICROSERVICES
-            uri: lb://API-MICROSERVICES
+          - id: WIGELL-TRAVELS
+            uri: lb://WIGELL-TRAVELS
             predicates:
-              - Path=/api/**
+              - Path=/api/v2/**

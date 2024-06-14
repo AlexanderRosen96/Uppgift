@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class AdminController {
 
     @Autowired
     private DestinationService destinationService;
+
 
     @GetMapping("/customers")
     @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
@@ -44,7 +46,8 @@ public class AdminController {
 
     @PutMapping("/updatedestination/{id}")
     @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
-    public ResponseEntity<Destination> updateDestination(@PathVariable int id, @RequestBody Destination destination) {
-        return ResponseEntity.ok(destinationService.updateDestinationById(id, destination));
+    public ResponseEntity<String> updateDestination(@PathVariable int id, @RequestBody Destination destination) {
+        destinationService.updateDestinationById(id, destination);
+        return new ResponseEntity<>("Destination is updated", HttpStatus.OK);
     }
 }

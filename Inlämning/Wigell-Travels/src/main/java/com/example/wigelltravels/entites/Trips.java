@@ -11,19 +11,26 @@ public class Trips {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(length = 45, nullable = false)
     private String hotalName;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
+    @JoinColumn(referencedColumnName = "id", nullable = false)
     @JsonIgnoreProperties({"trips", "bookings"})
     private Destination destination;
 
 
-    @OneToMany (mappedBy = "trip",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany (mappedBy = "trip",cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JsonIgnoreProperties({"Trips", "trip", "destination"})
     private List<Bookings> bookings;
 
     public Trips() {
+    }
+
+    public Trips(String hotalName, Destination destination, List<Bookings> bookings) {
+        this.hotalName = hotalName;
+        this.destination = destination;
+        this.bookings = bookings;
     }
 
     public int getId() {

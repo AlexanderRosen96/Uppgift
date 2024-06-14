@@ -11,19 +11,31 @@ public class Customers {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idNumber;
 
+    @Column(length = 30, nullable = false)
     private String userName;
 
+    @Column(length = 20, nullable = false)
     private String firstName;
 
+    @Column(length = 25, nullable = false)
     private String lastName;
 
+    @Column(length = 50, nullable = false)
     private String address;
 
-    @OneToMany (mappedBy = "customer",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany (mappedBy = "customer",cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("Customers")
     private List<Bookings> bookingsList;
 
     public Customers() {
+    }
+
+    public Customers(String userName, String firstName, String lastName, String address, List<Bookings> bookingsList) {
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.bookingsList = bookingsList;
     }
 
     public int getIdNumber() {
