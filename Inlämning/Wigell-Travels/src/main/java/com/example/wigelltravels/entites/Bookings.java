@@ -15,7 +15,7 @@ public class Bookings {
     @Column(length = 12, nullable = false)
     private LocalDate timeOfDeparture;
 
-    @Column(length = 2000000, nullable = false)
+    @Column(length = 20, nullable = false)
     private double totalPriceInSEK;
 
     private double totalPriceInEuro;
