@@ -30,7 +30,7 @@ public class BookingsService implements BookingsServiceInterface{
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final String convertEuro = "http://localhost:5656/exchange";
+    private static final String convertEuro = "http://host.docker.internal:5656/exchange";
 
     @Override
     public Bookings addBooking(Bookings bookings) {

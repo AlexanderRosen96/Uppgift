@@ -1,13 +1,25 @@
 server:
   port: 8585
+
 spring:
   application:
-    name: Mars-Gateway
+    name: Mars-gateway
   cloud:
     gateway:
       mvc:
         routes:
-          - id: WIGELL-TRAVELS
-            uri: lb://WIGELL-TRAVELS
+          - id: Wigell-Travels
+            uri: lb://Wigell-Travels
             predicates:
               - Path=/api/v2/**
+          - id: ChangeValue
+            uri: lb://ChangeValue
+            predicates:
+              - Path=/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://mars-eureka-server:8761/eureka/
+  instance:
+    prefer-ip-address: true

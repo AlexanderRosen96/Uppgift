@@ -8,7 +8,7 @@ public class ExchangeRate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(length = 2000000)
+    @Column(length = 20)
     private double amountInSEK;
     private double amountInEuro;
     private double rate = 0.1;
