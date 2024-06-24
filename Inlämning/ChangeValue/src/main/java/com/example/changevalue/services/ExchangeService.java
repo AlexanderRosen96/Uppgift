@@ -15,13 +15,6 @@ public class ExchangeService implements ExchangeServiceInteface {
     @Override
     public double exchange(ExchangeRate exchangeRate) {
         exchangeRate.setAmountInEuro(exchangeRate.getAmountInSEK()*exchangeRate.getRate());
-        save(exchangeRate);
         return exchangeRate.getAmountInEuro();
-    }
-
-    @Override
-    public ExchangeRate save(ExchangeRate exchangeRate) {
-        exchangeRepositorie.save(exchangeRate);
-        return exchangeRate;
     }
 }
